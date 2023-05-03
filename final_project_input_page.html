@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      h1{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 60px;
+        margin-left: 600px;
+        padding: 50px;
+      }
+      h2{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+        margin-left: 38%;
+        margin-bottom: 20px;
+      }
+      .form1{
+        width: 175px;
+        margin-left: 45%;
+        padding: 30px;
+        color:  #00ff00;
+        border-style: solid;
+        border-color: black;
+        background-color: grey;
+      }
+      body{
+        background-color: #0099ff;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
+      }
+      label, input {
+        display: block;
+    }
+    
+    label {
+        margin-bottom: 20px;
+    }
+    p{
+      margin-left: 680px;
+      color: #00ff00;
+    }
+    div{
+      margin-left: 46%;
+    }
+    select{
+      width:100px;
+      height:20px;
+    }
+    </style>
+  </head>
+<body>
+  <!--This form returns to the main page-->
+  <form action="http://localhost:8080/">
+    <input type="submit" value="Back To Homepage" />
+</form>
+<h1>Get Together</h1>
+<h2>Create New Activity Listing</h2>
+<!--This form  takes the input from the user on the page-->
+<form id="form" class="form1" required>
+<label>Activity: </br>
+<select name="activity select"id='act_input'>
+  <option value="Running">Running</option>
+  <option value="Biking">Biking</option>
+  <option value="Fishing">Fishing</option>
+  <option value="Hiking">Hiking</option>
+  <option value="Basketball">Basketball</option>
+  <option value="Soccer">Soccer</option>
+  <option value="Yoga">Yoga</option>
+</select>
+</label>
+<label>Date:
+<input type="date" name="date" id="dateinput" required >
+</label>
+<label>Time:
+<input type="time" id="time" name="appt"min="00:00" max="24:59" required>
+</label>
+<label>Zip Code:
+<input type="text" id="zip" value="" required>
+</label>
+<label>Location:
+<input type="text" id="location" value="" required>
+</label>
+<input type="submit" value="Submit">
+</form>
+<p id="log"></p>
+<!--This button refreshes the page after a post is made to clear the search fields. If done after a post, the post is still saved to local storage-->
+<div>
+  <button onClick="window.location.reload();">New Posting</button>
+</div>
+<script>
+  //This is the template for an object of an activity that is being posted
+  function activity(type,time,date,zipcode,location){
+    this.type=type;
+    this.time=time;
+    this.date=date;
+    this.zipcode=zipcode;
+    this.location=location;
+}
+//This function creates a new object of activity from above and pushes it to the object array. It is then saved to local storage.
+function create(type,time,date,zipcode,location){
+    temp1=new activity(type,time,date,zipcode,location);
+    objects.push(temp1);
+    localStorage.setItem("Data",JSON.stringify(objects));
+}
+//This function is triggered on the submit of the form. This then calls the create function from above.
+  function logSubmit(event) {
+    log.textContent="Submitted for Other Users to View.";
+    act=document.getElementById("act_input").value;
+    var date=document.getElementById("dateinput").value;
+    var time=document.getElementById("time").value;
+    var zip=document.getElementById("zip").value;
+    var location=document.getElementById("location").value;
+    create(act,time,date,zip,location);
+    event.preventDefault();
+  }
+  //Empty list to be filled by an activity object when a form is submitted.
+  var objects=[];
+  //This listens for a submit event which triggers the log submit function. This also prints the log text when it is triggered.
+  const form = document.getElementById("form");
+  log = document.getElementById("log");
+  form.addEventListener("submit", logSubmit);
+</script>
+</body>
+</html>

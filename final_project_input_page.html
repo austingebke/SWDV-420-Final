@@ -42,6 +42,10 @@
     div{
       margin-left: 46%;
     }
+    .text{
+      Margin-left:38%;
+      color:#00ff00;
+    }
     select{
       width:100px;
       height:20px;
@@ -53,8 +57,11 @@
   <form action="http://localhost:8080/">
     <input type="submit" value="Back To Homepage" />
 </form>
-<h1>Get Together</h1>
+<h1>Activity Finder</h1>
 <h2>Create New Activity Listing</h2>
+<div class="text">
+  Use this page to post an activity for other people to join.
+</div>
 <!--This form  takes the input from the user on the page-->
 <form id="form" class="form1" required>
 <label>Activity: </br>
@@ -83,10 +90,6 @@
 <input type="submit" value="Submit">
 </form>
 <p id="log"></p>
-<!--This button refreshes the page after a post is made to clear the search fields. If done after a post, the post is still saved to local storage-->
-<div>
-  <button onClick="window.location.reload();">New Posting</button>
-</div>
 <script>
   //This is the template for an object of an activity that is being posted
   function activity(type,time,date,zipcode,location){
@@ -104,13 +107,13 @@ function create(type,time,date,zipcode,location){
 }
 //This function is triggered on the submit of the form. This then calls the create function from above.
   function logSubmit(event) {
-    log.textContent="Submitted for Other Users to View.";
     act=document.getElementById("act_input").value;
     var date=document.getElementById("dateinput").value;
     var time=document.getElementById("time").value;
     var zip=document.getElementById("zip").value;
     var location=document.getElementById("location").value;
     create(act,time,date,zip,location);
+    window.location.reload();
     event.preventDefault();
   }
   //Empty list to be filled by an activity object when a form is submitted.

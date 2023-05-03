@@ -52,7 +52,7 @@
     }
     </style>
   </head>
-<body>
+<body onload="load_data()">
   <!--This form returns to the main page-->
   <form action="http://localhost:8080/">
     <input type="submit" value="Back To Homepage" />
@@ -91,6 +91,12 @@
 </form>
 <p id="log"></p>
 <script>
+  function load_data(){
+  data=JSON.parse(localStorage.getItem("Data"));
+  for(i=0;i<data.length;i++){
+    objects.push(data[i])
+  }
+  }
   //This is the template for an object of an activity that is being posted
   function activity(type,time,date,zipcode,location){
     this.type=type;

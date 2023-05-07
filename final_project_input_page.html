@@ -5,18 +5,18 @@
       h1{
         font-family: Arial, Helvetica, sans-serif;
         font-size: 60px;
-        margin-left: 600px;
+        text-align: center;
         padding: 50px;
       }
       h2{
         font-family: Arial, Helvetica, sans-serif;
         font-size: 30px;
-        margin-left: 38%;
+        text-align: center;
         margin-bottom: 20px;
       }
       .form1{
         width: 175px;
-        margin-left: 45%;
+        margin-left: 43%;
         padding: 30px;
         color:  #00ff00;
         border-style: solid;
@@ -36,14 +36,14 @@
         margin-bottom: 20px;
     }
     p{
-      margin-left: 680px;
+      text-align: center;
       color: #00ff00;
     }
     div{
-      margin-left: 46%;
+      text-align: center;
     }
     .text{
-      Margin-left:38%;
+      text-align: center;
       color:#00ff00;
     }
     select{
@@ -113,20 +113,20 @@ function create(type,time,date,zipcode,location){
 }
 //This function is triggered on the submit of the form. This then calls the create function from above.
   function logSubmit(event) {
+    log.textContent("Submitted for others to View");
     act=document.getElementById("act_input").value;
     var date=document.getElementById("dateinput").value;
     var time=document.getElementById("time").value;
     var zip=document.getElementById("zip").value;
     var location=document.getElementById("location").value;
     create(act,time,date,zip,location);
-    window.location.reload();
     event.preventDefault();
   }
   //Empty list to be filled by an activity object when a form is submitted.
   var objects=[];
   //This listens for a submit event which triggers the log submit function. This also prints the log text when it is triggered.
   const form = document.getElementById("form");
-  log = document.getElementById("log");
+  const log = document.getElementById("log");
   form.addEventListener("submit", logSubmit);
 </script>
 </body>

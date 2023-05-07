@@ -52,6 +52,7 @@
     }
     </style>
   </head>
+  <!--The on load call loads the data when the page is loaded.-->
 <body onload="load_data()">
   <!--This form returns to the main page-->
   <form action="http://localhost:8080/">
@@ -91,6 +92,7 @@
 </form>
 <p id="log"></p>
 <script>
+  //This loads in the data so that none is lost between switching pages.
   function load_data(){
   data=JSON.parse(localStorage.getItem("Data"));
   for(i=0;i<data.length;i++){
